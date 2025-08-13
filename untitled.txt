@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wingo 1-Minute Demo Prediction</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    h1 {
+        color: #38bdf8;
+    }
+    input {
+        padding: 10px;
+        margin: 5px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px 20px;
+        background: #38bdf8;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #0ea5e9;
+    }
+    .result {
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>Wingo 1-Minute Demo Prediction</h1>
+
+<label>পিরিয়ড নাম্বারের শেষ ৪ ডিজিট:</label><br>
+<input type="number" id="periodNumber" placeholder="উদাহরণ: 2141"><br>
+
+<label>বর্তমান গেম সংখ্যা:</label><br>
+<input type="number" id="currentNumber" placeholder="০-৯"><br>
+
+<button onclick="predict()">প্রেডিকশন দেখাও</button>
+
+<div class="result" id="result"></div>
+
+<script>
+function predict() {
+    let period = document.getElementById("periodNumber").value;
+    let current = document.getElementById("currentNumber").value;
+
+    if (period.length !== 4 || current === "") {
+        document.getElementById("result").innerText = "দয়া করে সঠিক ইনপুট দিন";
+        return;
+    }
+
+    // কাস্টম ডেমো ফর্মুলা (মজা করার জন্য)
+    let sum = parseInt(period.split('').reduce((a, b) => parseInt(a) + parseInt(b))) + parseInt(current);
+    let prediction = sum % 10;
+
+    let color = (prediction % 2 === 0) ? "Green" : "Red";
+
+    document.getElementById("result").innerHTML = 
+        `পরবর্তী সংখ্যা: <span style="color:yellow">${prediction}</span> <br> সম্ভাব্য রঙ: <span style="color:${color.toLowerCase()}">${color}</span>`;
+}
+</script>
+
+</body>
+</html>
